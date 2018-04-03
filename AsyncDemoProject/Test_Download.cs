@@ -10,7 +10,7 @@ namespace AsyncDemoProject
     {
         string url = "http://www.deelay.me/5000/www.delsink.com";
 
-        [TestMethod]
+        //[TestMethod]
         public void TestDownload()
         {
             var httpRequestInfo = HttpWebRequest.Create(url);
