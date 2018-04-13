@@ -13,10 +13,12 @@ namespace _01_02_Delegates_Forms
     public partial class Form1 : Form
     {
         delegate void DoWorkDelegate();
+        DoWorkDelegate m;
 
         public Form1()
         {
             InitializeComponent();
+            m = new DoWorkDelegate(DoWork);
 
         }
 
@@ -26,12 +28,15 @@ namespace _01_02_Delegates_Forms
         }
         private void DoWork()
         {
-            label1.Text = "DoWork worked!";
+            System.Threading.Thread.Sleep(10000);
+            lock (this)
+            {
+                label1.Text = "DoWork worked!"; 
+            }
         }
 
         private void btn_Async_Click(object sender, EventArgs e)
-        {
-            DoWorkDelegate m = new DoWorkDelegate(DoWork);
+        {         
             IAsyncResult asyncResult = m.BeginInvoke(null, null);
             m.EndInvoke(asyncResult);
         }
